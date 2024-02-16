@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guide</title>
+    <link rel="stylesheet" href="CSS/style.css">
+    <style>
+        #bodyContainer{
+            margin: 50px auto;
+            width: 700px;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            /* transition: all 3s ease-in-out;
+            opacity: 0; */
+            border: 1px solid #adb5bd;
+        }
+        #bodyContainer>div{
+            border: 1px solid gainsboro;
+            width: 200px;
+            border-radius: 10%;
+            margin: 20px;
+            padding: 10px 20px;
+            transition: all 3s ease-in-out;
+            opacity: 0;
+        }
+        #bodyContainer:hover .introduce{
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div id="headerContainer">
+            <div id="title">
+                <a href="Home.html"><img src="img/home.png" alt="" width="50"></a>
+            </div>
+            <div id="menu">
+                <ul>
+                    <li><a href="Guide.html">Guide</a></li>
+                    <li><a href="Introduce.html">Introduce</a></li>
+                    <li><a href="Fare.html">Fare</a></li>
+                    <li><a href="Reservation.html">Reservation</a></li>
+                </ul>
+            </div>
+            <div id="login">
+                <a href="SignUp.html"><img src="img/login.jpg" alt="" width="50" height="50"></a>
+            </div>
+        </div>
+    </header>
+    <div id="bodyContainer">
+        <div id = 'div1' class="introduce">
+            <h3>이용 안내</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum architecto harum repellat ab odio quo natus quibusdam itaque consequatur velit.</p>
+        </div>
+        <div id = 'div2' class="introduce">
+            <h3>예매 안내</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae temporibus sint vel aliquid veniam debitis alias repellendus eligendi ut facilis.</p>
+        </div>
+        <div id = 'div3' class="introduce">
+            <h3>결제 안내</h3>
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Debitis similique repellat iste itaque alias sunt atque molestias porro incidunt quidem?</p>
+        </div>
+        <div id = 'div4' class="introduce">
+            <h3>환불 안내</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae assumenda aperiam asperiores soluta iure nisi numquam officiis quasi eos vel.</p>
+        </div>
+    </div>
+</body>
+</html>

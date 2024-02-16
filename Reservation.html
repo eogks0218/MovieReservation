@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservation</title>
+    <link rel="stylesheet" href="CSS/style.css">
+    <style>
+        #bodyContainer{
+            width: 500px;
+            margin: 50px auto;
+            background-color: #a5090b;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .movieContainer{
+            width: 400px;
+            margin: 30px auto;
+            text-align: center;
+        }
+        .movieContainer label{
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+        }
+        .movieContainer select{
+            text-align: left;
+            font-size: 0.9rem;
+            padding: 5px;
+            padding-left: 15px;
+            border-radius: 10px;
+            border: none;
+            width: 200px;
+        }
+
+        .explainContainer{
+            background-color: rgba(255, 255, 255, 0.3);
+            padding: 5px 20px;
+            color: rgba(0, 0, 0, 0.4);
+            border-radius: 10px;
+        }
+        .explainContainer span{
+            display: inline-block;
+            width: 15px;
+            height: 12px;
+            border-radius: 50% 50% 0 0;
+        }
+        #avaSeat{
+            background-color: black;
+        }
+        #occSeat{
+            background-color: white;
+            margin-left: 15px;
+        }
+
+        .screen{
+            margin: 20px auto;
+            padding: 5px;
+            width: 140px;
+            height: 0px;
+            border-top: 120px solid white;
+            border-left: 30px solid transparent;
+            border-right: 30px solid transparent;
+            transform: rotateX(-60deg);
+        }
+
+        .seatContainer{
+            margin: 0 auto;
+            width: 400px;
+            text-align: center;
+        }
+        .occupied{
+            display: inline-block;
+            margin: 2px;
+            width: 15px;
+            height: 12px;
+            background-color: white;
+            cursor: pointer;
+            border-radius: 50% 50% 0 0;
+        }
+        .seat{
+            display: inline-block;
+            width: 15px;
+            height: 12px;
+            background-color: black;
+            cursor: pointer;
+            margin: 2px;
+            border-radius: 50% 50% 0 0;
+        }
+        .seat:nth-child(2), .seat:nth-child(6),
+        .occupied:nth-child(2), .occupied:nth-child(6){
+            margin-right: 15px;
+        }
+
+        .textContainer{
+            margin: 10px auto;
+            width: 400px;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+        .textContainer p{
+            color: white;
+        }
+        .textContainer p span{
+            color: coral;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div id="headerContainer">
+            <div id="title">
+                <a href="Home.html"><img src="img/home.png" alt="" width="50"></a>
+            </div>
+            <div id="menu">
+                <ul>
+                    <li><a href="Guide.html">Guide</a></li>
+                    <li><a href="Introduce.html">Introduce</a></li>
+                    <li><a href="Fare.html">Fare</a></li>
+                    <li><a href="Reservation.html">Reservation</a></li>
+                </ul>
+            </div>
+            <div id="login">
+                <a href="SignUp.html"><img src="img/login.jpg" alt="" width="50" height="50"></a>
+            </div>
+        </div>
+    </header>
+    <div id="bodyContainer">
+        <div class="movieContainer">
+            <label for="movie">Pick a Movie :  </label>
+            <select name="pickMovie" id="movie">
+                <option class="price" value="0">Select Movie</option>
+                <option class="price" value="10">Elemental ($10)</option>
+                <option class="price" value="12">Frozen 2 ($12)</option>
+                <option class="price" value="8">Aladdin ($8)</option>
+            </select>
+        </div>
+
+        <div class="explainContainer">
+            <span id="avaSeat"></span> Available Seat
+            <span id="occSeat"></span> Occupied Seat
+        </div>
+
+        <div class="seatContainer">
+            <div class="screen"></div>
+        </div>
+
+        <div class="textContainer">
+            <p>You have selected <span id="movieSelect"></span> seats for a price of $ <span id="moviePrice"></span></p>
+        </div>
+    </div>
+
+    <script>
+    let row = 6;
+    let column = 8;
+    let screen = document.querySelectorAll('.screen');
+    let seatNumList = [];
+
+    let booking = (event, i, j) => {
+        if(event.target.classList.contains('seat')){
+            event.target.classList.replace('seat', 'occupied')
+            seatNumList.push(i*8+j+1)
+        }else{
+            event.target.classList.replace('occupied', 'seat')
+            // seatNumList.push(i*8+j+1)
+            let seatNumber = i*8+j+1
+            let index = seatNumList.indexOf(seatNumber);
+            if(index > -1){
+                seatNumList.splice(index, 1)
+            }
+        }
+        getMovie();
+    }
+
+    for(let i=0; i<row; i++){
+    let div = document.createElement('div')
+    div.classList.add('row')
+    for(let j=0; j<column; j++){
+        let span = document.createElement('span')
+        span.classList.add('seat')
+        div.appendChild(span)
+        span.addEventListener('click', (event) => booking(event, i, j))
+    }
+    screen[0].parentNode.insertBefore(div, screen[0].nextSibling)
+    }
+
+    let movie = document.querySelector('#movie')
+    let movieSelect = document.querySelector('#movieSelect')
+    let moviePrice = document.querySelector('#moviePrice')
+
+
+    let getMovie = () => {
+        let movieTitle = movie.value;
+        movieSelect.innerHTML = seatNumList.length;
+        moviePrice.innerHTML = movieTitle * seatNumList.length;
+    }
+
+    movie.addEventListener('change', getMovie)
+    </script>
+</body>
+</html>
